@@ -1,0 +1,30 @@
+body {
+    background-color: rgb(229, 250, 233);
+    text-decoration: solid;
+    color: rgb(36, 22, 3);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+div {
+    display: inline-block;
+    
+}
+.green {
+    background-color: green;
+}
+.blue {
+    background-color: blue;
+}
+.red {
+    background-color: red;
+}
+.purple {
+    background-color: purple;
+}
+.orange {
+    background-color: orange;
+}
+
+.site-content{
+    width: 200px;
+    
+}
