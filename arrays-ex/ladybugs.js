@@ -1,62 +1,57 @@
-function ladybugs(input) {
-  let fieldSize = input[0];
-  let ladybugPositionsStr = input[1];
+function ladybugs(arr) {
+  let fieldSize = arr[0];
+  let ladybugIdxs = arr[1].split(' ').map(Number);
+  let field = [];
 
-
-  let ladybugPositions = ladybugPositionsStr.split(' ');
-
-  for (let i = 0; i < ladybugPositions.length; i++) {
-    let position = parseInt(ladybugPositions[i]);
-
-    if (!isNaN(position) && position >= 0 && position < fieldSize) {
-      field[position] = 1;
+  
+  for (let i = 0; i < fieldSize; i++) {
+    if (ladybugIdxs.includes(i)) {
+      field[i] = 1;
+    } else {
+      field[i] = 0;
     }
   }
   for (let j = 2; j < arr.length; j++) {
     let command = arr[j];
     let tokens = command.split(' ');
 
-  for (let i = 2; i < input.length; i++) {
-    let [bugIndex, direction, flyLength] = input[i].split(" ");
+    let ladyBugIdx = Number(tokens[0]);
+    let direction = tokens[1];
+    let flyLength = Number(tokens[2]);
 
-    let index = parseInt(bugIndex);
-    let length = parseInt(flyLength);
-
-    if (
-      !field.includes(1) ||
-      index < 0 ||
-      index >= fieldSize ||
-      field[index] !== 1
-    ) {
+    if (!field[ladyBugIdx]) {
       continue;
-    }
+    } 
     field[ladyBugIdx] = 0;
 
-    field[index] = 0;
+    if(direction == 'left') {
+      let newIdx = ladyBugIdx - flyLength;
 
-    let newPosition = index;
+      if (newIdx >= 0) {
+        while(field[newIdx] == 1) {
+          newIdx -= flyLength;
+        }
 
-    if (direction == "right") {
-      newPosition += length;
-    } else if (direction == "left") {
-      newPosition -= length;
-    }
+        if (newIdx >= 0) {
+          field[newIdx] = 1;
+        }
+      } 
+    } else {
+      let newIdx = ladyBugIdx + flyLength;
 
-    while (
-      newPosition >= 0 &&
-      newPosition < fieldSize &&
-      field[newPosition] == 1
-    ) {
-      if (direction == "right") {
-        newPosition += length;
-      } else if (direction == "left") {
-        newPosition -= length;
-      }
+      if (newIdx < field.length) {
+        while(field[newIdx] == 1) {
+          newIdx += flyLength;
+        }
+
+        if (newIdx < field.length) {
+          field[newIdx] = 1;
+        }
     }
 
   }
 
-  console.log(field.join(" "));
+} console.log(field.join(' '));
 }
 ladybugs([3, "0 1", "0 right 1", "2 right 1"]);
 //ladybugs([ 3, '0 1 2', '0 right 1', '1 right 1', '2 right 1']);
