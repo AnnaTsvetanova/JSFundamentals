@@ -2,7 +2,6 @@ function ladybugs(input) {
   let fieldSize = input[0];
   let ladybugPositionsStr = input[1];
 
-  let field = Array(fieldSize).fill(0);
 
   let ladybugPositions = ladybugPositionsStr.split(' ');
 
@@ -13,6 +12,9 @@ function ladybugs(input) {
       field[position] = 1;
     }
   }
+  for (let j = 2; j < arr.length; j++) {
+    let command = arr[j];
+    let tokens = command.split(' ');
 
   for (let i = 2; i < input.length; i++) {
     let [bugIndex, direction, flyLength] = input[i].split(" ");
@@ -28,6 +30,7 @@ function ladybugs(input) {
     ) {
       continue;
     }
+    field[ladyBugIdx] = 0;
 
     field[index] = 0;
 
@@ -51,9 +54,6 @@ function ladybugs(input) {
       }
     }
 
-    if (newPosition >= 0 && newPosition < fieldSize) {
-      field[newPosition] = 1;
-    }
   }
 
   console.log(field.join(" "));
