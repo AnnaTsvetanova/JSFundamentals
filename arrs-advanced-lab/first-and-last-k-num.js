@@ -1,0 +1,5 @@
+function firstAnsLastKNum (){
+
+}
+firstAnsLastKNum();
+firstAnsLastKNum();
