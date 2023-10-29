@@ -1,5 +1,6 @@
 function convert(jsonStr) {
     let object = JSON.parse(jsonStr);
+    console.log(object);
     
     let keys = Object.keys(object);
 
