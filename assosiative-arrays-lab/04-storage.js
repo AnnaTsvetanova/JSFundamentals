@@ -1,17 +1,20 @@
 function solve (arr){
-    let storage = {};
+    let storage = new Map ();
 
-    for (let items of arr){
+
+    for (let items of arr) {
         let [prod, qty] = items.split(' ');
-        storage[prod] = Number(qty);
-
-        if(storage.hasOwnProperty(prod)){
-            storage[prod] += Number(qty);
-        } else {
-            storage[prod] = Number(qty);
+    
+        if (storage.has(prod)) {
+          
+          qty = parseInt(qty) + parseInt(storage.get(prod));
         }
+    
+        storage.set(prod, qty);
+      }
+    for (let [prod, qty] of storage) {
+        console.log(prod, '->', qty);
     }
-    console.log(storage.Map(prod, '->', qty));
 }
 solve(['tomatoes 10',
 'coffee 5',
