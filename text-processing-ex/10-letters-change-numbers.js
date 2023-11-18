@@ -6,7 +6,13 @@ function letterChangeNums (input){
     let result = 0;
     let sum = 0;
 
+// check if the middle character is a number if not do smth
+// check if the separator is \n
+
     for (word of words) {
+
+        word = word.trim();
+        
         
 
 
@@ -39,5 +45,3 @@ function letterChangeNums (input){
 letterChangeNums('A12b s17G');
 // letterChangeNums('P34562Z q2576f H456z');
 // letterChangeNums('a1A');
-letterChangeNums('P34562Z q2576f   H456z
-    End');
