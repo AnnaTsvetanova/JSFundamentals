@@ -6,16 +6,19 @@ function letterChangeNums (input){
     let result = 0;
     let sum = 0;
 
-// check if the middle character is a number if not do smth
-// check if the separator is \n
+
+    if(input.includes('\n')) {
+        return;
+    }
+    let pattern = /[A-Za-z]\d+[A-Za-z]/g;
+
 
     for (word of words) {
 
-        word = word.trim();
-        
-        
+        let match = word.match(pattern);
 
-
+        if (match) {
+            
         let firstChar = word[idx];
         let number = Number(word.slice(1,word.length - 1));
         let lastChar = word[word.length - 1];
@@ -38,10 +41,13 @@ function letterChangeNums (input){
         }
         
         sum += result;
-    }
+    }}
     console.log(sum.toFixed(2));
 
 }
 letterChangeNums('A12b s17G');
 // letterChangeNums('P34562Z q2576f H456z');
 // letterChangeNums('a1A');
+
+
+

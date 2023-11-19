@@ -3,46 +3,35 @@ function travelTime (arr) {
 
     for (let element of arr) {
         let [country, town, cost] = element.split(' > ');
-        let currentCost = parseInt(cost);
+        cost = Number(cost);
+        
 
-        if (travelInfo[country] && travelInfo[country].town == town && currentCost < travelInfo[country].cost){
-            travelInfo[country.push(currentCost)];
+        if(!travelInfo.hasOwnProperty(country)){
+            travelInfo[country] = {};
+        } 
+
+        let destination = travelInfo[country];
+
+        if (!destination.hasOwnProperty(town)) {
+            destination[town] = cost;
         } else {
-            
+            if (destination[town] > cost) {
+                destination[town] = cost;
+            }
         }
-    }}
+    }
+    let result = Object.entries(travelInfo);
+    
+    let sorted = result.sort((a, b) => a[0].localeCompare(b[0]) || (a[1] - b[1]));
 
+    for (let [country, towns] of sorted) {
+        let sortedTowns = Object.entries(towns).sort((a, b) => a[1] - b[1]);
+        let townsStr = sortedTowns.map(entry => `${entry[0]} -> ${entry[1]}`).join(' ');
 
+        console.log(`${country} -> ${townsStr}`);
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-    //     if (!travelInfo[country] || currentCost < travelInfo[country].lowestCost) {
-    //         travelInfo[country] = {
-    //             lowestCOst: currentCost,
-    //             towns: [town],
-    //         };
-    //       }else if (currentCost == travelInfo[country].lowestCost){
-    //         travelInfo[country].towns.push(town);
-    //       }
-    //     }
-    //     let sortedDestinations = Object.keys(travelInfo).sort();
-
-    //     for(let country of sortedDestinations) {
-    //         let { lowestCost, towns } = travelInfo[country];
-    //         towns.sort();
-    //         let formattedTowns = towns.map((town) => `${country} -> ${town} -> ${lowestCost}`);
-    //         console.log(formattedTowns.join('\n'));
-    //     }
-    // }
 travelTime([
     "Bulgaria > Sofia > 500",   
     "Bulgaria > Sopot > 800",    
